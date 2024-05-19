@@ -2,6 +2,24 @@
 
 Lines of Code Counter
 
+# Usage
+```sh
+lcc <path> <path2> <path3> ...
+```
+
+# Dependencies
+
+- gcc
+
+# Building
+
+You will need to run these with elevated privilages.
+
+```sh
+$ make 
+# make install
+```
+
 # Contributions
 Contributions are welcomed, feel free to open a pull request.
 

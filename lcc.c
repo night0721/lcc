@@ -38,7 +38,7 @@ void count_lines(const char *filename, language *lang, lang_stats *stat)
         stat->lines++;
         total_stats.lines++;
         char *line = buffer;
-        while (isspace(*line)) line++;  // Skip leading whitespace
+        while (isspace(*line)) line++; /* Skip leading whitespace */
 
         if (*line == '\0') {
             stat->blanks++;
