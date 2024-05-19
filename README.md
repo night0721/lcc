@@ -28,7 +28,7 @@ You can also add directories name and file extensions to ignore when counting li
 
 # Warning
 
-Result may not be 100% correct due to coding style, but from testing, code with [suckless coding style](https://suckless.org/coding_style) will be modt accurate due to different method of commenting in code.
+Result may not be 100% correct due to coding style, but from testing, code with [suckless coding style](https://suckless.org/coding_style) will be most accurate due to different method of commenting in code.
 
 # Contributions
 Contributions are welcomed, feel free to open a pull request.
