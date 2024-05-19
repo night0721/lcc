@@ -93,7 +93,7 @@ void process_directory(const char *dirname)
         for (int i = 0; i < IGNORE_DIRS; i++) {
             if (strstr(entry->d_name, ignore_dir[i]) != NULL) {
                 skip = 1;
-                continue;
+                break;
             }
         }
         if (skip) continue;
