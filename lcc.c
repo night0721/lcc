@@ -21,7 +21,6 @@ typedef struct {
 } lang_stats;
 
 lang_stats stats[NUM_LANGS] = {0};
-lang_stats total_stats = {0};
 
 void count_lines(const char *filename, language *lang, lang_stats *stat)
 {
@@ -36,13 +35,11 @@ void count_lines(const char *filename, language *lang, lang_stats *stat)
 
     while (fgets(buffer, BUFFER_SIZE, file)) {
         stat->lines++;
-        total_stats.lines++;
         char *line = buffer;
         while (isspace(*line)) line++; /* Skip leading whitespace */
 
         if (*line == '\0') {
             stat->blanks++;
-            total_stats.blanks++;
             continue;
         }
 
@@ -52,28 +49,23 @@ void count_lines(const char *filename, language *lang, lang_stats *stat)
                 in_comment = 0;
                 line = end + strlen(lang->block_comment_end);
                 stat->comments++;
-                total_stats.comments++;
             } else {
                 stat->comments++;
-                total_stats.comments++;
                 continue;
             }
         }
 
         if (lang->line_comment && strncmp(line, lang->line_comment, strlen(lang->line_comment)) == 0) {
             stat->comments++;
-            total_stats.comments++;
         } else if (lang->block_comment_start && strstr(line, lang->block_comment_start) != NULL) {
             char *start = strstr(line, lang->block_comment_start);
             char *end = strstr(start + strlen(lang->block_comment_start), lang->block_comment_end);
             if (end) {
                 stat->comments++;
-                total_stats.comments++;
                 line = end + strlen(lang->block_comment_end);
             } else {
                 in_comment = 1;
                 stat->comments++;
-                total_stats.comments++;
             }
         }
     }
@@ -120,7 +112,6 @@ void process_directory(const char *dirname)
                     char *ext = strstr(entry->d_name, ".");
                     if (strcmp(ext ? ext : entry->d_name, languages[i].extensions[j]) == 0) {
                         stats[i].files++;
-                        total_stats.files++;
                         count_lines(path, &languages[i], &stats[i]);
                         break;
                     }
@@ -162,14 +153,21 @@ int main(int argc, char **argv)
 
     qsort(stats, NUM_LANGS, sizeof(lang_stats), compare_stats);
 
-    printf("%-10s %-6s %-6s %-8s %-6s %-6s\n", "Language", "Files", "Code", "Comment", "Blank", "Total");
-    printf("%-10s %-6d %-6d %-8d %-6d %-6d\n", "Total", total_stats.files, total_stats.lines - total_stats.comments - total_stats.blanks, total_stats.comments, total_stats.blanks, total_stats.lines);
+    printf("%-10s %-6s %-6s %-8s %-6s %-6s\n", "Language", "Files", "Code", "Comment", "Blank", "Lines");
+    lang_stats total_stats = {0};
+
     for (size_t i = 0; i < NUM_LANGS; i++) {
         if (stats[i].files > 0) {
             int code_lines = stats[i].lines - stats[i].blanks - stats[i].comments;
+            total_stats.files += stats[i].files;
+            total_stats.lines += stats[i].lines;
+            total_stats.comments += stats[i].comments;
+            total_stats.blanks += stats[i].blanks;
             printf("%-10s %-6d %-6d %-8d %-6d %-6d\n", stats[i].name, stats[i].files, code_lines, stats[i].comments, stats[i].blanks, stats[i].lines);
         }
     }
+    printf("%-10s %-6d %-6d %-8d %-6d %-6d\n", "Total", total_stats.files, total_stats.lines, total_stats.comments, total_stats.blanks, total_stats.lines);
+
 
     return 0;
 }
