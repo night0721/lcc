@@ -166,7 +166,8 @@ int main(int argc, char **argv)
             printf("%-10s %-6d %-6d %-8d %-6d %-6d\n", stats[i].name, stats[i].files, code_lines, stats[i].comments, stats[i].blanks, stats[i].lines);
         }
     }
-    printf("%-10s %-6d %-6d %-8d %-6d %-6d\n", "Total", total_stats.files, total_stats.lines, total_stats.comments, total_stats.blanks, total_stats.lines);
+    int total_code_lines = total_stats.lines - total_stats.blanks - total_stats.comments;
+    printf("%-10s %-6d %-6d %-8d %-6d %-6d\n", "Total", total_stats.files, total_code_lines, total_stats.comments, total_stats.blanks, total_stats.lines);
 
 
     return 0;
