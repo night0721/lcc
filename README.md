@@ -1,10 +1,10 @@
 # lcc
 
-Lines of Code Counter
+Fast lines of code counter.
 
 # Usage
 ```sh
-lcc <path> <path2> <path3> ...
+lcc <path> <path2> <path3> - Count lines of code in supplied paths(no argument would be considered counting in current directory)
 ```
 
 # Dependencies

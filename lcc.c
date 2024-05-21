@@ -134,6 +134,10 @@ int compare_stats(const void *a, const void *b) {
 
 int main(int argc, char **argv)
 {
+    if (argc == 2 && strncmp(argv[1], "-h", 2) == 0) {
+	fprintf(stderr, "lcc - Lines of Code Counter\n\nUsage: lcc <path> <path2> <path3> - Count lines of code in supplied paths(no argument would be considered counting in current directory)\n");
+	return 0;
+    }
     for (size_t i = 0; i < NUM_LANGS; i++) {
         stats[i].name = languages[i].name;
     }
