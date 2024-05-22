@@ -9,13 +9,13 @@ lcc <path> <path2> <path3> ...
 
 # Dependencies
 
-- gcc
+None
 
 # Building
 
 You will need to run these with elevated privilages.
 
-```sh
+```
 $ make 
 # make install
 ```
