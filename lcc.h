@@ -51,9 +51,9 @@ language languages[] = {
     {"Vimscript", {".vim"}, NULL, NULL, "\""},
 };
 
-#define IGNORE_DIRS 5
+#define IGNORE_DIRS 8
 /* IGNORE_DIRS must have same length of ignore_dir */
 
-char *ignore_dir[IGNORE_DIRS] = {"stagit", "env", "TerminalChat", "cath-docs", ".d.ts"};
+char *ignore_dir[IGNORE_DIRS] = {"stagit", "env", "ref", "cath-docs", ".d.ts", "coslinux", "Zig", "pdfs"};
 
 #endif
