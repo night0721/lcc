@@ -5,7 +5,7 @@
 #include <ctype.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <limits.h>
+#include <linux/limits.h>
 
 #include "lcc.h"
 
