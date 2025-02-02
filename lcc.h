@@ -48,6 +48,7 @@ language languages[] = {
     {"Shell", {".sh", ".bash"}, NULL, NULL, "#"},
     {"SQL", {".sql"}, "/*", "*/", "--"},
     {"TypeScript", {".ts",".tsx"}, "/*", "*/", "//"},
+	{"Typst", {".typ"}, "/*", "*/", "//"},
     {"Vimscript", {".vim"}, NULL, NULL, "\""},
 };
 
