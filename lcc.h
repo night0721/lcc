@@ -38,7 +38,7 @@ language languages[] = {
     {"Objective-C", {".m"}, "/*", "*/", "//"},
     {"OCaml", {".ml"}, "(*", "*)", NULL},
     {"Pascal", {".pas"}, "{", "}", NULL},
-    {"Perl", {".pl", ".pm"}, NULL, NULL, "#"},
+    {"Perl", {".pl", ".pm", ".pp"}, NULL, NULL, "#"},
     {"PHP", {".php"}, "/*", "*/", "//"},
     {"Python", {".py"}, "\"\"\"", "\"\"\"", "#"},
     {"R", {".r", ".R"}, NULL, NULL, "#"},
@@ -52,9 +52,6 @@ language languages[] = {
     {"Vimscript", {".vim"}, NULL, NULL, "\""},
 };
 
-#define IGNORE_DIRS 8
-/* IGNORE_DIRS must have same length of ignore_dir */
-
-char *ignore_dir[IGNORE_DIRS] = {"stagit", "env", "ref", "cath-docs", ".d.ts", "coslinux", "Zig", "pdfs"};
+char *ignore_dir[IGNORE_DIRS] = {"env", "ref", "coslinux", "Zig", "pdfs", NULL};
 
 #endif

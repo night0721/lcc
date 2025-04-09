@@ -36,7 +36,10 @@ void count_lines(const char *filename, language *lang, lang_stats *stat)
     while (fgets(buffer, BUFFER_SIZE, file)) {
         stat->lines++;
         char *line = buffer;
-        while (isspace(*line)) line++; /* Skip leading whitespace */
+        while (isspace(*line)) {
+			/* Skip leading whitespace */
+			line++;
+		}
 
         if (*line == '\0') {
             stat->blanks++;
@@ -86,17 +89,22 @@ void process_directory(const char *dirname)
     struct stat info;
 
     while ((entry = readdir(dp))) {
-        if (entry->d_name[0] == '.') continue;  /* Skip hidden files and directories */
+		if (entry->d_name[0] == '.') {
+			/* Skip hidden files and directories */
+			continue;
+		}
         
         int skip = 0;
-        /* not count ignore folders */
-        for (int i = 0; i < IGNORE_DIRS; i++) {
+        /* Not count ignore folders */
+        for (int i = 0; ignore_dir[i] != NULL; i++) {
             if (strstr(entry->d_name, ignore_dir[i]) != NULL) {
                 skip = 1;
                 break;
             }
         }
-        if (skip) continue;
+		if (skip) {
+			continue;
+		}
 
         snprintf(path, sizeof(path), "%s/%s", dirname, entry->d_name);
         if (stat(path, &info) == -1) {
@@ -123,7 +131,8 @@ void process_directory(const char *dirname)
     closedir(dp);
 }
 
-int compare_stats(const void *a, const void *b) {
+int compare_stats(const void *a, const void *b)
+{
     lang_stats *a_stats = (lang_stats *) a;
     lang_stats *b_stats = (lang_stats *) b;
     int a_code_lines = a_stats->lines - a_stats->blanks - a_stats->comments;
@@ -135,9 +144,10 @@ int compare_stats(const void *a, const void *b) {
 int main(int argc, char **argv)
 {
     if (argc == 2 && strncmp(argv[1], "-h", 2) == 0) {
-	fprintf(stderr, "lcc - Lines of Code Counter\n\nUsage: lcc <path> <path2> <path3> - Count lines of code in supplied paths(no argument would be considered counting in current directory)\n");
-	return 0;
+		fprintf(stderr, "lcc - Lines of Code Counter\n\nUsage: lcc <path> <path2> <path3> - Count lines of code in supplied paths(no argument would be considered counting in current directory)\n");
+		return 0;
     }
+
     for (size_t i = 0; i < NUM_LANGS; i++) {
         stats[i].name = languages[i].name;
     }
