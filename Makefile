@@ -11,7 +11,7 @@ CFLAGS += -std=c99 -pedantic -Wall
 	$(CC) -o $@ $(CFLAGS) -c $<
 
 $(TARGET): $(TARGET).o
-	$(CC) -o $@ $(TARGET).o $(LIBS)
+	$(CC) -o $@ $(TARGET).o
 
 dist:
 	mkdir -p $(TARGET)-$(VERSION)
