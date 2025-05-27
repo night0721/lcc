@@ -52,6 +52,6 @@ language languages[] = {
     {"Vimscript", {".vim"}, NULL, NULL, "\""},
 };
 
-char *ignore_dir[IGNORE_DIRS] = {"env", "ref", "coslinux", "Zig", "pdfs", NULL};
+char *ignore_dir[] = {"env", "ref", "coslinux", "Zig", "pdfs", NULL};
 
 #endif
